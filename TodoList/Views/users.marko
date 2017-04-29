@@ -1,0 +1,13 @@
+﻿static var dateLoaded = new Date();
+<link rel="stylesheet" href="static/style.css">
+
+<h1>${input.title}</h1>
+<ul>
+    <for(user in input.users)>
+      <li>${user.name}</li>
+    </for>
+</ul>
+
+<p>
+    This template was loaded at ${dateLoaded.toString()}
+</p>

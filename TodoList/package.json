@@ -1,0 +1,15 @@
+{
+  "name": "nodejs-web-app2",
+  "version": "0.0.0",
+  "description": "NodejsWebApp2",
+  "main": "server.js",
+  "author": {
+    "name": "jkhome"
+  },
+  "dependencies": {
+    "consolidate": "^0.14.5",
+    "express": "^4.15.2",
+    "express-marko": "^1.4.0",
+    "marko": "^4.2.8"
+  }
+}

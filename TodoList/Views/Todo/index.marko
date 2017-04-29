@@ -1,0 +1,43 @@
+﻿
+import todoApp from './todoapp';
+
+class {
+    onMount() {
+	console.log('I have entered the viewport');
+        // Subscribe to the change state event. In response
+        // to a state change event we will rerender the entire
+        // app using the new state.
+        this.subscribeTo(new TodoApp())
+            .on('change', () => {
+                this.forceUpdate();
+            });
+    }
+}
+<script> document.addEventListener("DOMContentLoaded", function () {function isToggleAllChecked(todos) {
+    var toggleAllChecked = true;
+    for (var i=0; i<todos.length; i++) {
+        var todo = todos[i];
+        if (!todo.completed) {
+            return false;
+        }
+    }
+    return true;}  });
+</script>
+
+<button type="button" id="los">Quadrat errechnen</button>
+<section.main>
+
+    <input.toggle-all
+        type="checkbox"
+        checked=false/>
+
+    <ul.todo-list>
+        <for(todo in data.todos)>
+            <todomvc-todo-item(todo) key="todo-${todo.id}"/>
+        </for>
+    </ul>
+
+</section>
+
+
+<script>function sayHi() { alert(`Hi!`);} ;los.addEventListener ('click', sayHi, true);</script>

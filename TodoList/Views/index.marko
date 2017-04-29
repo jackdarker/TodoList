@@ -1,0 +1,20 @@
+﻿import {add, subtract} from './tools';
+$ var message = 'Welcome to <b>Marko</b>!';
+<include('./layout.marko')>
+  <@title>
+    This is the title
+  </@title>
+  <@body>
+    This is the body content
+    <p>1 + 2 = ${add(1, 2)}</p>
+    <div>
+      HTML $!{message}
+    </div>
+    <div>
+      Escaped HTML: ${message}
+    </div>
+  </@body>
+  <@footer>
+    This is the footer content
+  </@footer>
+</include>
