@@ -29,6 +29,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="server.js" />
+    <Compile Include="Views\public\js\arrivals.js" />
+    <Compile Include="Views\public\js\knockout-3.3.0.js" />
+    <Compile Include="Views\public\js\page.js" />
     <Compile Include="Views\Todo\todoapp.js">
       <SubType>Code</SubType>
     </Compile>
@@ -44,6 +47,12 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\layout.marko">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\public\api\data.json" />
+    <Content Include="Views\public\css\fonts\roboto.woff" />
+    <Content Include="Views\public\css\style.css" />
+    <Content Include="Views\test\index.marko">
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\TicTacToe\index.marko">
@@ -75,6 +84,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />
+    <Folder Include="Views\public\api\" />
+    <Folder Include="Views\public\css\" />
+    <Folder Include="Views\public\css\fonts\" />
+    <Folder Include="Views\public\js\" />
+    <Folder Include="Views\test\" />
     <Folder Include="Views\TicTacToe\" />
     <Folder Include="Views\public\" />
     <Folder Include="Views\Todo\" />

@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html class="js no-touchevents" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky-High Airport Arrivals</title>
+    <link async rel="stylesheet" href="static/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,600,300italic,600italic" rel="stylesheet" type="text/css">
+    <meta name="theme-color" content="#29BDBB">
+	<script src="static/js/knockout-3.3.0.js"></script>
+</head>
+<body>
+    <header>
+        <div class="content">
+            <h3>Arrivals</h3>
+        </div>
+    </header>
+    <div class="container">
+        <div id="main" class="content">
+            <ul class="arrivals-list" data-bind="foreach: arrivals, visible: arrivals().length > 0">
+                <li class="item">
+					<input type="checkbox" data-bind="checked: isDone" />
+					<button data-bind="click: deleteEntry">Delete</button>
+                    <input type="text" data-bind="value: title, disable: isDone"/>
+                    <span class="status" data-bind="html: status"></span>
+                    <span class="time" data-bind="html: time"></span>
+                </li>
+            </ul>
+			<form action="/arrivals/saveform" method="post">
+				<input type="hidden" name="arrivals" data-bind="value: ko.toJSON(arrivals)" />
+				<button type="submit">Save</button>
+			</form>
+        </div>
+    </div>
+	<div id="liveExample" class="liveExample">
+    <p>
+    Choose a ticket class:
+    <select data-bind="options: tickets, 
+                       optionsCaption: 'Choose...',
+                       optionsText: 'name',
+                       value: chosenTicket"><option value="">Choose...</option><option value="">Economy</option><option value="">Business</option><option value="">First Class</option></select>
+                       
+    <button data-bind="enable: chosenTicket, click: resetTicket">Clear</button>
+    </p>                   
+    <p data-bind="with: chosenTicket">
+        You have chosen <b data-bind="text: name">Business</b>
+        ($<span data-bind="text: price">449.22</span>)    
+    </p>
+    
+    <script type="text/javascript">
+        function TicketsViewModel() {
+            this.tickets = [
+                { name: "Economy", price: 199.95 },
+                { name: "Business", price: 449.22 },
+                { name: "First Class", price: 1199.99 }
+            ];
+            this.chosenTicket = ko.observable();
+            this.resetTicket = function() { this.chosenTicket(null) }
+        }
+        ko.applyBindings(new TicketsViewModel(), document.getElementById("liveExample"));
+    </script>	
+</div>
+    <script src="static/js/arrivals.js"></script>
+    <script src="static/js/page.js"></script>
+    <script> Arrivals.loadData();ko.applyBindings(Page.vm,document.getElementById('main'));</script>
+</body>
+</html>

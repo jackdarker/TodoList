@@ -10,6 +10,9 @@
     "consolidate": "^0.14.5",
     "express": "^4.15.2",
     "express-marko": "^1.4.0",
-    "marko": "^4.2.8"
+    "json8": "^0.9.2",
+    "marko": "^4.2.8",
+    "mssql": "^4.0.1",
+    "sqlite3": "^3.1.8"
   }
 }

@@ -3,26 +3,17 @@ import todoApp from './todoapp';
 
 class {
     onMount() {
-	console.log('I have entered the viewport');
         // Subscribe to the change state event. In response
         // to a state change event we will rerender the entire
         // app using the new state.
-        this.subscribeTo(new TodoApp())
+        this.subscribeTo(todoApp)
             .on('change', () => {
                 this.forceUpdate();
             });
     }
 }
-<script> document.addEventListener("DOMContentLoaded", function () {function isToggleAllChecked(todos) {
-    var toggleAllChecked = true;
-    for (var i=0; i<todos.length; i++) {
-        var todo = todos[i];
-        if (!todo.completed) {
-            return false;
-        }
-    }
-    return true;}  });
-</script>
+
+<todomvc-app todos=todoApp.todos filter=todoApp.filter />
 
 <button type="button" id="los">Quadrat errechnen</button>
 <section.main>

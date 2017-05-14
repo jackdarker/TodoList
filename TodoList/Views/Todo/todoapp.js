@@ -1,5 +1,4 @@
-﻿'use strict'
-var EventEmitter = require('events');
+﻿var EventEmitter = require('events');
 
 var nextId = 0;
 
@@ -24,11 +23,6 @@ class TodoApp extends EventEmitter {
             },
             {
                 title: 'Build an awesome web app',
-                completed: false,
-                id: nextId++
-            },
-            {
-                title: 'Get shit done',
                 completed: false,
                 id: nextId++
             },
@@ -73,8 +67,7 @@ class TodoApp extends EventEmitter {
      * Private method for committing the changes to a todo item by
      * making a service call to the backend.
      *
-     * @param {Object} todoId The todo item to update on the backend
-     * @param {Object} newProps
+     * @param {Object} todo The todo item to update on the backend
      */
     updateTodo(todoId, newProps) {
         this.todos = this.todos.slice(0);
