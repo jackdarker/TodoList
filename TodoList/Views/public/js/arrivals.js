@@ -46,7 +46,8 @@ var Arrivals = (function() {
             return new Promise(function (resolve, reject) {
                 var request = new XMLHttpRequest();
                 //request.open('GET', 'static/api/data.json');
-                request.open('POST', '/arrivals/saveform');             
+                request.open('POST', '/arrivals/saveform');    
+                request.setRequestHeader("Content-Type", "application/json");
                 request.onload = function () {
                     // success
                     if (request.status === 200) {
@@ -68,7 +69,7 @@ var Arrivals = (function() {
                     reject(Error("Network Error"));
                 };
 
-                request.send(JSON.stringify(Page.vm));
+                request.send(JSON.stringify({"title": "Malta to Amsterdam", "status": "On time", "time": "08:45" }));
             });
         };
     }

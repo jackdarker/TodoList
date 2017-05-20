@@ -28,7 +28,11 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Model.js">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="server.js" />
+    <Compile Include="serverlib\model.js" />
     <Compile Include="Views\public\js\arrivals.js" />
     <Compile Include="Views\public\js\knockout-3.3.0.js" />
     <Compile Include="Views\public\js\page.js" />
@@ -83,6 +87,7 @@
     <Content Include="Views\public\style.css" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="serverlib\" />
     <Folder Include="Views\" />
     <Folder Include="Views\public\api\" />
     <Folder Include="Views\public\css\" />

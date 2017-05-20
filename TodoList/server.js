@@ -2,7 +2,10 @@
 require('marko/node-require'); // Allow Node.js to require and load `.marko` files
 var express = require('express');
 var markoExpress = require('marko/express');
-
+var bodyParser = require('body-parser')
+var jsonParser = bodyParser.json()
+var model = require('./serverlib/model.js')
+const mymodel = model(2);
 //load the view-templates
 var templateUser = require('./views/users');
 var templateHome = require('./views/index');
@@ -21,23 +24,18 @@ users.push({ name: 'loki' });
 users.push({ name: 'jane' });
 
 var oo = require('json8');
-/*var sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database(':memory:');
+console.log(`The area of my square is ${mymodel.area()}, ${mymodel.version()}`);
 
-db.serialize(function () {
-    db.run("CREATE TABLE lorem (info TEXT)");
+function connecting(s) {
+    console.log(s.address());
+}
 
-    var stmt = db.prepare("INSERT INTO lorem VALUES (?)");
-    for (var i = 0; i < 10; i++) {
-        stmt.run("Ipsum " + i);
-    }
-    stmt.finalize();
+function deinit() {
+    db.close();
+}
 
-    db.each("SELECT rowid AS id, info FROM lorem", function (err, row) {
-        console.log(row.id + ": " + row.info);
-    });
-});
-db.close();*/
+
+
 
 //setup the routing for urls
 app.get('/users', function (req, res) {
@@ -46,15 +44,22 @@ app.get('/users', function (req, res) {
         users: users
     });
 });
-app.post('/arrivals/saveform', function (req, res) {
-    console.log(req._dump());
-    res.send('POST request to homepage');
+//the post-request has to use setRequestHeader("Content-Type", "application/json") !
+app.post('/arrivals/saveform', jsonParser, function (req, res) {
+    if (!req.body) {
+        return res.sendStatus(400)
+    } else {
+        console.log(req.body);
+        res.send('POST request to homepage');
+    }
 });
 app.get('/api', function (req, res) {
-    var set = new Set()
-    set.add({"id":"1", "title": "Malta to Rome", "status": "On time", "time": "12:05" });
-    set.add({"id": "2", "title": "Malta to Zittau", "status": "On time", "time": "12:05" });
-    res.send(oo.serialize(set));
+    //var set = new Set()
+    //set.add({"id":"1", "title": "Malta to Rome", "status": "On time", "time": "12:05" });
+    //set.add({"id": "2", "title": "Malta to Zittau", "status": "On time", "time": "12:05" });
+    mymodel.getAll()
+        .then(set => res.send(oo.serialize(set)))
+        .catch(reason => console.error(reason));
 });
 app.get('/api2', function (req, res) {
     var map = new Map()
@@ -89,3 +94,7 @@ var server = app.listen(3030, function () {
     var port = server.address().port;
     console.log('Example app listening at http://%s:%s', host, port);
 });
+server.addListener('connection', connecting);
+//mymodel.getByID(1).forEach(function (value) {
+//    console.log(value.title);
+//});
