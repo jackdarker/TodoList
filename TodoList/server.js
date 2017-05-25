@@ -11,6 +11,7 @@ var templateUser = require('./views/users');
 var templateHome = require('./views/index');
 var templateTodo = require('./views/todo/index');
 var templateTest = require('./views/test/index');
+var templateTodos2 = require('./views/todo2/index');
 var templateTicTacToe = require('./views/tictactoe/index');
 
 var app = express();
@@ -24,7 +25,7 @@ users.push({ name: 'loki' });
 users.push({ name: 'jane' });
 
 var oo = require('json8');
-console.log(`The area of my square is ${mymodel.area()}, ${mymodel.version()}`);
+console.log(`Modelversion: ${mymodel.version()}`);
 
 function connecting(s) {
     console.log(s.address());
@@ -50,7 +51,10 @@ app.post('/arrivals/saveform', jsonParser, function (req, res) {
         return res.sendStatus(400)
     } else {
         console.log(req.body);
-        res.send('POST request to homepage');
+        mymodel.save(req.body.tasks)
+            //.then(refresh => res.send(refresh ?'refresh':'Done'))
+            .then(refresh=>res.send(refresh))
+            .catch(reason => console.error(reason));
     }
 });
 app.get('/api', function (req, res) {
@@ -70,6 +74,9 @@ app.get('/api2', function (req, res) {
 
 app.get('/test', function (req, res) {
     res.marko(templateTest, {});
+});
+app.get('/todo2', function (req, res) {
+    res.marko(templateTodos2, {});
 });
 
 app.get('/todo', function (req, res) {

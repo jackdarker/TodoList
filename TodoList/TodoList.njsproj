@@ -28,12 +28,12 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Model.js">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="server.js" />
     <Compile Include="serverlib\model.js" />
     <Compile Include="Views\public\js\arrivals.js" />
+    <Compile Include="Views\public\js\Client.js">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Views\public\js\knockout-3.3.0.js" />
     <Compile Include="Views\public\js\page.js" />
     <Compile Include="Views\Todo\todoapp.js">
@@ -60,6 +60,9 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\TicTacToe\index.marko">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Todo2\index.marko">
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Todo\components\todomvc-app.marko">
@@ -89,6 +92,7 @@
   <ItemGroup>
     <Folder Include="serverlib\" />
     <Folder Include="Views\" />
+    <Folder Include="Views\Todo2\" />
     <Folder Include="Views\public\api\" />
     <Folder Include="Views\public\css\" />
     <Folder Include="Views\public\css\fonts\" />

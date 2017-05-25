@@ -4,8 +4,8 @@ var Arrivals = (function() {
         self.title = "";
         self.status = "";
         self.time = "";
-        self.isDone = "";
-        self.delete = "";
+        self.isDone = false;
+        self.delete = false;
     }
 
     function ArrivalApiService() {
@@ -42,7 +42,7 @@ var Arrivals = (function() {
             });
         };
         // updates entrys to server
-        self.pushAll = function () {
+        self.pushAll = function (data) {
             return new Promise(function (resolve, reject) {
                 var request = new XMLHttpRequest();
                 //request.open('GET', 'static/api/data.json');
@@ -69,7 +69,8 @@ var Arrivals = (function() {
                     reject(Error("Network Error"));
                 };
 
-                request.send(JSON.stringify({"title": "Malta to Amsterdam", "status": "On time", "time": "08:45" }));
+                request.send(JSON.stringify(data));
+                //request.send(JSON.stringify({ "title": "Malta to Amsterdam", "status": "On time", "time": "08:45" }));
             });
         };
     }
@@ -107,6 +108,7 @@ var Arrivals = (function() {
                 return arrivalAdapter.toArrivalViewModels(response);
             });
         };
+        
     }
 
 
@@ -116,10 +118,7 @@ var Arrivals = (function() {
 
     // initialize the controller
     var arrivalController = new ArrivalController(arrivalApiService, arrivalAdapter);    
-    this.deleteEntry = function () {
-        alert(`Hi!`);
-        arrivalApiService.pushAll();
-    };
+    
     return {
         loadData: function () {
             // retrieve all routes
@@ -129,6 +128,9 @@ var Arrivals = (function() {
                 Page.vm.arrivals(response);
                 document.querySelector(".arrivals-list").classList.remove('loading');
             });
+        },
+        pushData: function (data) {
+            arrivalApiService.pushAll(data);
         }
     };
 

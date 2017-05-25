@@ -4,6 +4,11 @@ var Page = (function() {
     function ViewModel() {
         var self = this;
         self.arrivals = ko.observableArray([]);
+        self.deleteEntry = function (data) {
+            alert(`Hi!`);
+            Arrivals.pushData(data);
+        };
+
     }
 
     // expose the view model through the Page module

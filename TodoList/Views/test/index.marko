@@ -20,7 +20,7 @@
             <ul class="arrivals-list" data-bind="foreach: arrivals, visible: arrivals().length > 0">
                 <li class="item">
 					<input type="checkbox" data-bind="checked: isDone" />
-					<button data-bind="click: deleteEntry">Delete</button>
+					<button data-bind="click: $root.deleteEntry">Delete</button>
                     <input type="text" data-bind="value: title, disable: isDone"/>
                     <span class="status" data-bind="html: status"></span>
                     <span class="time" data-bind="html: time"></span>

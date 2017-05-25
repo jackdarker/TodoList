@@ -2,7 +2,7 @@
 
 
 var db = new sqlite3.Database(':memory:');
-var _Version = '1';
+var _Version = "01.00";
 db.serialize(function () {
     db.run("CREATE TABLE Todo (title TEXT, status TEXT, time TEXT)");
 
@@ -57,14 +57,52 @@ function getAll() {
 
     });
 }
+function save(Values) {
+    return new Promise((resolve, reject) => { //wrap this in promise becausethe callback is called async !
+        var needsRefresh = false;
+        var Jobs = Values.length;
+        var stmtInsert = db.prepare("INSERT INTO Todo VALUES (?,?,?);");
+        var stmtUpdate = db.prepare("Update Todo Set title=?,status=?, time=? where rowid=?");
+        var stmtID = db.prepare("select last_insert_rowid();");
+        compl = function () {
+            Jobs--;
+            if (Jobs <= 0) {
+                stmtInsert.finalize();
+                stmtUpdate.finalize();
+                stmtID.finalize();
+                resolve(needsRefresh);
+            }
+        };
+        if (Values.length <= 0) compl();
+        for (var i = 0; i < Values.length; i++) {
+            if (Values[i].id > 0) {
+                stmtUpdate.run(Values[i].title, Values[i].status, Values[i].time, Values[i].id, function (err) {
+                    if (err) throw err;
+                    compl();
+                });
+            } else {
+                stmtInsert.run(Values[i].title, Values[i].status, Values[i].time);
+                stmtID.get( function (err, row) {
+                    if (err) {
+                        reject(err); return;
+                    }
+                    console.log(row);
+                    needsRefresh = true;
+                    compl();
+                });
+            }
+        }
+        
+    });
+}
 
 
 module.exports = (width) => {
     return {
-        area: () => width * 2,
         version: () => _Version,
         getByID: (ID) => getByID(ID),
-        getAll: () => getAll()
+        getAll: () => getAll(),
+        save: (Values) => save(Values)
     };
 };
 //db.close();
