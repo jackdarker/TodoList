@@ -62,6 +62,9 @@
     <Content Include="Views\TicTacToe\index.marko">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\TicTacToe\login.marko">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Views\Todo2\index.marko">
       <SubType>Code</SubType>
     </Content>
