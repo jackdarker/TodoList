@@ -34,6 +34,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Views\public\js\arrivals.js" />
+    <Compile Include="Views\public\js\bootstrap.js" />
+    <Compile Include="Views\public\js\bootstrap.min.js" />
     <Compile Include="Views\public\js\Client.js">
       <SubType>Code</SubType>
     </Compile>
@@ -47,6 +49,7 @@
     </Compile>
     <Content Include="package.json" />
     <Content Include="README.md" />
+    <Content Include="Views\bootstraptest\index.marko" />
     <Content Include="Views\hello.marko">
       <SubType>Code</SubType>
     </Content>
@@ -57,8 +60,24 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\public\api\data.json" />
+    <Content Include="Views\public\css\bootstrap-theme.css" />
+    <Content Include="Views\public\css\bootstrap-theme.css.map" />
+    <Content Include="Views\public\css\bootstrap-theme.min.css" />
+    <Content Include="Views\public\css\bootstrap-theme.min.css.map" />
+    <Content Include="Views\public\css\bootstrap.css" />
+    <Content Include="Views\public\css\bootstrap.css.map" />
+    <Content Include="Views\public\css\bootstrap.min.css" />
+    <Content Include="Views\public\css\bootstrap.min.css.map" />
+    <Content Include="Views\public\css\font-awesome.min.css" />
     <Content Include="Views\public\css\fonts\roboto.woff" />
     <Content Include="Views\public\css\style.css" />
+    <Content Include="Views\public\css\w3-theme-black.css" />
+    <Content Include="Views\public\css\w3.css" />
+    <Content Include="Views\public\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Views\public\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Views\public\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Views\public\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Views\public\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Views\test\index.marko">
       <SubType>Code</SubType>
     </Content>
@@ -98,6 +117,8 @@
   <ItemGroup>
     <Folder Include="serverlib\" />
     <Folder Include="Views\" />
+    <Folder Include="Views\bootstraptest\" />
+    <Folder Include="Views\public\fonts\" />
     <Folder Include="Views\Todo2\" />
     <Folder Include="Views\public\api\" />
     <Folder Include="Views\public\css\" />

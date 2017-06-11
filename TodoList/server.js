@@ -16,6 +16,7 @@ var templateTest = require('./views/test/index');
 var templateTodos2 = require('./views/todo2/index');
 var templateTicTacToe = require('./views/tictactoe/index');
 var templateLogin = require('./views/tictactoe/login')
+var templateBoot = require('./views/bootstraptest/index.marko')
 
 var app = express();
 app.use(markoExpress()); //enable res.marko(template, data)
@@ -46,6 +47,9 @@ app.get('/users', function (req, res) {
         title: 'Users',
         users: users
     });
+});
+app.get('/boot', function (req, res) {
+    res.marko(templateBoot, {  });
 });
 //the post-request has to use setRequestHeader("Content-Type", "application/json") !
 app.post('/arrivals/saveform', jsonParser, function (req, res) {
