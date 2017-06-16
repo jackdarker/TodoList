@@ -7,9 +7,9 @@
     "name": "jkhome"
   },
   "dependencies": {
-    "angular2": "^2.0.0-beta.21",
     "body-parser": "^1.17.1",
     "consolidate": "^0.14.5",
+    "custom-angular-cli": "^1.0.4",
     "express": "^4.15.2",
     "express-marko": "^1.4.0",
     "express-session": "^1.15.3",

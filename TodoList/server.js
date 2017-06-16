@@ -18,11 +18,12 @@ var templateTicTacToe = require('./views/tictactoe/index');
 var templateLogin = require('./views/tictactoe/login')
 var templateBoot = require('./views/bootstraptest/index.marko')
 
+
 var app = express();
 app.use(markoExpress()); //enable res.marko(template, data)
 app.use('/static', express.static(__dirname + '/views/public')); //other files like css or img are loaded from here
 //f.e.   <link rel="stylesheet" href="static/style.css">
-
+app.use('/', express.static(__dirname /*+ '/views/public'*/)); //other files like css or img are loaded from here
 app.use(require('body-parser').urlencoded({ extended: true }));  //this is needed for passport-local 
 app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
 myusers.init(app);
@@ -77,7 +78,9 @@ app.get('/api2', function (req, res) {
     map.set("2",{ "title": "Bonn to Zittau", "status": "On time", "time": "12:05" });
     res.send(oo.serialize(map));
 });
-
+app.get('/angi', function (req, res) {
+    res.sendFile(templateAngular, {});
+});
 app.get('/test', function (req, res) {
     res.marko(templateTest, {});
 });
