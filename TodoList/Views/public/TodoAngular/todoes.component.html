@@ -1,0 +1,28 @@
+<h2>My Todoes</h2>
+<div>
+  <label>Todo name:</label> <input #todoName />
+  <label>Todo time:</label> <input #todoTime />
+    <label for="status">Status</label>
+    <select class="form-control" id="status" #todoStatus required>
+        <option *ngFor="let pow of statusList" [value]="pow">{{pow}}</option>
+    </select>
+  <button (click)="add(todoName.value, todoStatus.value, todoTime.value); todoName.value=''">
+    Add
+  </button>
+</div>
+<ul class="todoes">
+  <li *ngFor="let todo of todoes" (click)="onSelect(todo)"
+      [class.selected]="todo === selectedtodo">
+    <span class="badge">{{todo.id}}</span>
+    <span>{{todo.title}}</span>
+    <span>{{todo.status}}</span>
+    <button class="delete"
+      (click)="delete(todo); $event.stopPropagation()">x</button>
+  </li>
+</ul>
+<div *ngIf="selectedtodo">
+  <h2>
+    {{selectedtodo.title | uppercase}} is my Todo
+  </h2>
+  <button (click)="gotoDetail()">View Details</button>
+</div>

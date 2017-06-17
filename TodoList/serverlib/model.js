@@ -3,6 +3,8 @@
 
 var db = new sqlite3.Database(':memory:');
 var _Version = "01.00";
+var _statusList = ["not started","started", "finished"];
+
 db.serialize(function () {
     db.run("CREATE TABLE Todo (title TEXT, status TEXT, time TEXT)");
 
@@ -33,7 +35,7 @@ function getByID(ID) {
             set.add({ "id": row.id, "title": row.title, "status": row.status, "time": row.time });
            
         }, function () {
-            resolve(set);
+            resolve({ data: set });
         });
         
     });
@@ -52,12 +54,13 @@ function getAll() {
             set.add({ "id": row.id, "title": row.title, "status": row.status, "time": row.time });
 
         }, function () {
-            resolve(set);
+            resolve({ data: set });
         });
 
     });
 }
-function save(Values) {
+//saves Array of entrys
+function saveMultiple(Values) {
     return new Promise((resolve, reject) => { //wrap this in promise becausethe callback is called async !
         var needsRefresh = false;
         var Jobs = Values.length;
@@ -95,15 +98,62 @@ function save(Values) {
         
     });
 }
+function save(Values) {
+    return new Promise((resolve, reject) => { //wrap this in promise becausethe callback is called async !
+        var needsRefresh = false;
+        var stmtInsert = db.prepare("INSERT INTO Todo VALUES (?,?,?);");
+        var stmtUpdate = db.prepare("Update Todo Set title=?,status=?, time=? where rowid=?");
+        var stmtID = db.prepare("select last_insert_rowid() as id;");
+        compl = function () {
 
+                stmtInsert.finalize();
+                stmtUpdate.finalize();
+                stmtID.finalize();
+                resolve({ data: Values });
 
+        };
+        if (Values.id > 0) {
+                stmtUpdate.run(Values.title, Values.status, Values.time, Values.id, function (err) {
+                    if (err) throw err;
+                    compl();
+                });
+        } else {
+                stmtInsert.run(Values.title, Values.status, Values.time);
+                stmtID.get(function (err, row) {
+                    if (err) {
+                        reject(err); return;
+                    }
+                    console.log(row);
+                    Values.id = row.id;
+                    needsRefresh = true;
+                    compl();
+                });
+        }
+    });
+}
+
+function deleteByID(ID) {
+    return new Promise((resolve, reject) => { //wrap this in promise becausethe callback is called async !
+        var needsRefresh = false;
+        var stmtDelete = db.prepare("delete from Todo where rowid=?;");
+        compl = function () {
+                stmtDelete.finalize();
+                resolve(needsRefresh);
+        };
+        stmtDelete.run(ID);
+        needsRefresh = true;
+        compl();
+    });
+}
 
 module.exports = (width) => {
     return {
         version: () => _Version,
+        statusList: () => _statusList,
         getByID: (ID) => getByID(ID),
         getAll: () => getAll(),
-        save: (Values) => save(Values)
+        save: (Values) => save(Values),
+        deleteByID: (ID) => deleteByID(ID)
     };
 };
 //db.close();

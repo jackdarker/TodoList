@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base href="/">
+    <title>Todo-List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src="static/todoangular/app.component.js"></script>
+    <link rel="stylesheet" href="static/styles.css">
+
+
+      <!-- Polyfills -->
+      <script src="./node_modules/core-js/client/shim.min.js"></script>
+      <script src="./node_modules/zone.js/dist/zone.js"></script>
+      <script src="./node_modules/systemjs/dist/system.src.js"></script>
+
+          
+
+
+    <script src="static/systemjs.config.js"></script>
+    <script>
+        System.import('static/todoangular/main.js').catch(function(err){ console.error(err); });
+    </script>
+  </head>
+
+  <body>
+    <my-app>Loading...</my-app>
+  </body>
+</html>

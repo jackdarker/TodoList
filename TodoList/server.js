@@ -64,19 +64,30 @@ app.post('/arrivals/saveform', jsonParser, function (req, res) {
             .catch(reason => console.error(reason));
     }
 });
-app.get('/api', function (req, res) {
-    //var set = new Set()
-    //set.add({"id":"1", "title": "Malta to Rome", "status": "On time", "time": "12:05" });
-    //set.add({"id": "2", "title": "Malta to Zittau", "status": "On time", "time": "12:05" });
+app.get('/todoapi', function (req, res) {
     mymodel.getAll()
         .then(set => res.send(oo.serialize(set)))
         .catch(reason => console.error(reason));
 });
-app.get('/api2', function (req, res) {
-    var map = new Map()
-    map.set("1",{ "title": "Bonn to Rome", "status": "On time", "time": "12:05" });
-    map.set("2",{ "title": "Bonn to Zittau", "status": "On time", "time": "12:05" });
-    res.send(oo.serialize(map));
+app.post('/todoapi/delete', jsonParser, function (req, res) {
+    if (!req.body) {
+        return res.sendStatus(400)
+    } else {
+        console.log(req.body);
+            mymodel.deleteByID(req.body.id)
+                .then(refresh => res.send(refresh))
+                .catch(reason => console.error(reason));
+    }
+});
+app.post('/todoapi/add', jsonParser, function (req, res) {
+    if (!req.body) {
+        return res.sendStatus(400)
+    } else {
+        console.log(req.body);
+        mymodel.save(req.body)
+            .then(refresh => res.send(refresh))
+            .catch(reason => console.error(reason));
+    }
 });
 app.get('/angi', function (req, res) {
     res.sendFile(templateAngular, {});

@@ -1,0 +1,9 @@
+<h3>Top todoes</h3>
+<div class="grid grid-pad">
+  <a *ngFor="let todo of todoes"  [routerLink]="['/detail', todo.id]"  class="col-1-4">
+    <div class="module hero">
+      <h4>{{todo.name}}</h4>
+    </div>
+  </a>
+</div>
+<todo-search></todo-search>

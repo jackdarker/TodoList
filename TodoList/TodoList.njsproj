@@ -58,6 +58,18 @@
     </Compile>
     <Compile Include="Views\public\js\knockout-3.3.0.js" />
     <Compile Include="Views\public\js\page.js" />
+    <Compile Include="Views\public\TodoAngular\app-routing.module.js" />
+    <Compile Include="Views\public\TodoAngular\app.component.js" />
+    <Compile Include="Views\public\TodoAngular\app.module.js" />
+    <Compile Include="Views\public\TodoAngular\dashboard.component.js" />
+    <Compile Include="Views\public\TodoAngular\in-memory-data.service.js" />
+    <Compile Include="Views\public\TodoAngular\main.js" />
+    <Compile Include="Views\public\TodoAngular\todo-detail.component.js" />
+    <Compile Include="Views\public\TodoAngular\todo-search.component.js" />
+    <Compile Include="Views\public\TodoAngular\todo-search.service.js" />
+    <Compile Include="Views\public\TodoAngular\todo.js" />
+    <Compile Include="Views\public\TodoAngular\todo.service.js" />
+    <Compile Include="Views\public\TodoAngular\todoes.component.js" />
     <Compile Include="Views\Todo\todoapp.js">
       <SubType>Code</SubType>
     </Compile>
@@ -118,6 +130,15 @@
     <Content Include="Views\public\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Views\public\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Views\public\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Views\public\TodoAngular\app.component.css" />
+    <Content Include="Views\public\TodoAngular\dashboard.component.css" />
+    <Content Include="Views\public\TodoAngular\dashboard.component.html" />
+    <Content Include="Views\public\TodoAngular\todo-detail.component.css" />
+    <Content Include="Views\public\TodoAngular\todo-detail.component.html" />
+    <Content Include="Views\public\TodoAngular\todo-search.component.css" />
+    <Content Include="Views\public\TodoAngular\todo-search.component.html" />
+    <Content Include="Views\public\TodoAngular\todoes.component.css" />
+    <Content Include="Views\public\TodoAngular\todoes.component.html" />
     <Content Include="Views\test\index.marko">
       <SubType>Code</SubType>
     </Content>
@@ -161,6 +182,7 @@
     <Folder Include="Views\public\app\" />
     <Folder Include="Views\bootstraptest\" />
     <Folder Include="Views\public\fonts\" />
+    <Folder Include="Views\public\TodoAngular\" />
     <Folder Include="Views\Todo2\" />
     <Folder Include="Views\public\api\" />
     <Folder Include="Views\public\css\" />
